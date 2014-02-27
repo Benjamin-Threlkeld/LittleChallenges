@@ -1,7 +1,7 @@
 function fibonacciSequence(limit) {
 	var currentFibonacci = 0,
 		lastFibonacci = 0,
-		fibonacciNumbers = [];
+		fibonacciNumbers = [],
 		limit = limit || 10;
 
 	for (i = 0; i < limit; i += 1) {
