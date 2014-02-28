@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="result"></div>
+<input id="answer" placeholder="Type your answer here" />
+<input id="check" type="button" value="Answer!" />
+<script>
+	function guessTheNumber() {
+		var resultField = document.getElementById('result');
+		var answerField = document.getElementById('answer');
+		var checkBtn = document.getElementById('check');
+		var turns = 20;
+		var turnsLeft = turns;
+		var maxNum = 20;
+		var gotIt = false;
+		
+		var number = Math.floor(Math.random() * maxNum);
+		console.log(number);
+
+		function validateInput(input) {
+			var numInput = parseInt(input, 10);
+			if (numInput != input) {
+				updateResult('Your input is invalid');
+			} else {
+				checkAnswer(numInput);
+			}
+		}
+
+		function win() {
+			alert('U Win!');
+		}
+
+		function checkAnswer(num) {
+			turnsLeft += -1;
+			if (num < number) {
+				updateResult('Your answer is too little, try a little higher' + turnsLeft + ' guesses remaining.');
+			} else if (num > number) {
+				updateResult('Your answer is too high!, try a lower number. You have ' + turnsLeft + ' guesses remaining.');
+			} else if (num == number) {
+				var turnsTaken = turns - turnsLeft;
+				var s = 's';
+				if (turnsTaken == 1) {
+					s = ''
+				}
+				updateResult('You got it in ' + (turns - turnsLeft) + ' turn' + s + '!');
+				gotIt = true;
+			}
+			if (turnsLeft < 1) {
+				updateResult('U ran out of turns');
+			}
+		}
+
+		function updateResult(info) {
+			result.innerHTML = info;
+		}
+		updateResult('i am thinking of a number between 0 and ' + maxNum);
+
+
+		checkBtn.addEventListener('click', function() {
+			validateInput(answerField.value);
+		}, false);
+	}
+	guessTheNumber();
+</script>
+</body>
+</html>
